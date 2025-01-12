@@ -1,0 +1,46 @@
+mqtt:
+  host: 192.your.ip.xxx # change me
+  user: change_me
+  password: change_me
+
+detectors:
+  coral:
+    type: edgetpu
+    device: pci
+
+go2rtc:
+  streams:
+    test_cam: # change camera name
+      - rtsp://{FRIGATE_RTSP_USER}:{FRIGATE_RTSP_PASSWORD}@yourip:port/channel
+
+record:
+  enabled: True
+  retain:
+    days: 5
+    mode: motion
+  events:
+    retain:
+      default: 30
+      mode: motion
+
+detect:
+  enabled: True
+
+snapshots:
+  enabled: True
+  retain:
+    default: 30
+
+cameras:
+  test_cam: # change camera name
+    enabled: true
+    ffmpeg:
+      inputs:
+        - path: rtsp://{FRIGATE_RTSP_USER}:{FRIGATE_RTSP_PASSWORD}@yourip:port/channel
+          roles:
+            - record
+        - path: rtsp://{FRIGATE_RTSP_USER}:{FRIGATE_RTSP_PASSWORD}@yourip:port/channel
+          roles:
+            - detect
+
+version: 0.14

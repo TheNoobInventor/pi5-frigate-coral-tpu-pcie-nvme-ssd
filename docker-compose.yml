@@ -1,0 +1,25 @@
+services:
+  frigate:
+    container_name: frigate
+    privileged: true # this may not be necessary for all setups
+    restart: unless-stopped
+    image: ghcr.io/blakeblackshear/frigate:stable
+    shm_size: "64mb" # update for your cameras based on calculation above
+    devices:
+      - /dev/apex_0:/dev/apex_0    # Passes a PCIe Coral, follow driver instructions here https://coral.ai/docs/m2/get-started/#2a-on-linux
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - /home/pi/frigate/config:/config # Replace "pi" with your chosen username
+      - /home/pi/frigate/storage:/media/frigate # Replace "pi" with your chosen username
+      - type: tmpfs # Optional: 1GB of memory, reduces SSD/SD Card wear
+        target: /tmp/cache
+        tmpfs:
+          size: 1000000000
+    ports:
+      - "5000:5000"
+      - "8554:8554" # RTSP feeds
+      - "8555:8555/tcp" # WebRTC over tcp
+      - "8555:8555/udp" # WebRTC over udp
+    environment:
+      FRIGATE_RTSP_USER: "change-me"
+      FRIGATE_RTSP_PASSWORD: "change-me"

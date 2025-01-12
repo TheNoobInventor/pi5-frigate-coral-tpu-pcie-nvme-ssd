@@ -1,0 +1,46 @@
+mqtt:
+  host: 192.168.8.243
+  user: mqtt_broker
+  password: "change-me" 
+
+detectors:
+  coral:
+    type: edgetpu
+    device: pci
+
+go2rtc:
+  streams:
+    library:
+      - rtsp://{FRIGATE_RTSP_USER}:{FRIGATE_RTSP_PASSWORD}@192.168.8.201:554/cam/realmonitor?channel=1&subtype=1
+
+record:
+  enabled: True
+  retain:
+    days: 5
+    mode: motion
+  events:
+    retain:
+      default: 30
+      mode: motion
+
+detect:
+  enabled: True
+
+snapshots:
+  enabled: True
+  retain:
+    default: 30
+
+cameras:
+  library:
+    enabled: true
+    ffmpeg:
+      inputs:
+        - path: rtsp://{FRIGATE_RTSP_USER}:{FRIGATE_RTSP_PASSWORD}@192.168.8.201:554/cam/realmonitor?channel=1&subtype=0
+          roles:
+            - record
+        - path: rtsp://{FRIGATE_RTSP_USER}:{FRIGATE_RTSP_PASSWORD}@192.168.8.201:554/cam/realmonitor?channel=1&subtype=1
+          roles:
+            - detect
+
+version: 0.14
