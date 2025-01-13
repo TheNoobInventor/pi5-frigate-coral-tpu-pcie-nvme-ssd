@@ -62,8 +62,8 @@ Geekworm's [X1004 Dual NVMe SSD shield](https://wiki.geekworm.com/X1004) has two
 The shield is shown below.
 
 <p align="center">
-<img title='X1004 empty' src=images/x1004_empty.jpg width=400>
-<img title='X1004 mounted' src=images/x1004_mounted.jpg width=400>
+  <img title='X1004 empty' src=images/x1004_empty.jpg width=500>
+  <img title='X1004 mounted' src=images/x1004_mounted.jpg width=500>
 </p>
 
 The IP camera used should meet Frigate's requirements of supporting H.264 encoding and the real-time streaming protocol or RTSP. The IP camera is setup in this [section](#ip-camera-setup).
@@ -81,21 +81,21 @@ Raspberry Pi OS Lite was chosen because the Pi 5 will be running headless, meani
 The Raspberry Pi Imager is used to flash the Raspberry Pi OS Lite on the MicroSD card (and also on the NVMe drive), it can be downloaded [here](https://www.raspberrypi.com/software/); the Raspberry Pi Foundation recommends using an SD card with [at least 16 GB of storage](https://www.raspberrypi.com/documentation/computers/getting-started.html#recommended-sd-cards) for the Raspberry Pi OS Lite. After installing the Raspberry Pi Imager, plug in the MicroSD card into the MicroSD card reader, then start the flashing process by picking the Raspberry Pi device to flash the OS image on.
 
 <p align='center'>
-<img title='Imager home' src=images/imager_home.png width="400">
-<img title='Imager Pi device' src=images/imager_pi_device.png width="400">
+  <img title='Imager home' src=images/imager_home.png width="500">
+  <img title='Imager Pi device' src=images/imager_pi_device.png width="500">
 </p>
 
 Next, click on **"Raspberry Pi OS (other)"** and choose the **Raspberry Pi OS Lite (64-bit)** image.
 <p align='center'>
-<img title='Imager os 1' src=images/imager_os_1.png width="400">
-<img title='Imager os 2' src=images/imager_os_2.png width="400">
+  <img title='Imager os 1' src=images/imager_os_1.png width="500">
+  <img title='Imager os 2' src=images/imager_os_2.png width="500">
 </p>
 
 Then choose the inserted MicroSD card as the storage for the image. Afterwards, there will be prompt to customize the OS, click **Edit Settings**.
 
 <p align='center'>
-<img title='Imager storage' src=images/imager_storage.png width="400">
-<img title='Imager custom settings' src=images/imager_cust_set_1.png width="400">
+<img title='Imager storage' src=images/imager_storage.png width="500">
+<img title='Imager custom settings' src=images/imager_cust_set_1.png width="500">
 </p>
 
 Under the **General** settings tab, choose a **hostname**, a **username** and **password**. The hostname is the unique identifier for the Pi 5 on the network.
@@ -105,15 +105,15 @@ Navigate to the **Services** tab, check the **Enable SSH button** and click on t
 Then save these settings.
 
 <p align='center'>
-<img title='Imager custom settings 2' src=images/imager_cust_set_2.png width="400">
-<img title='Imager custom settings 3' src=images/imager_cust_set_3.png width="400">
+  <img title='Imager custom settings 2' src=images/imager_cust_set_2.png width="500">
+  <img title='Imager custom settings 3' src=images/imager_cust_set_3.png width="500">
 </p>
 
 You will be prompted to input your admin password before the Imager starts writing the OS image to the MicroSD card. The card can be ejected once the flashing process is done.
 
 <p align='center'>
-<img title='Imager flashing' src=images/imager_flashing.png width="400">
-<img title='Imager flash done' src=images/imager_flash_done.png width="400">
+  <img title='Imager flashing' src=images/imager_flashing.png width="500">
+  <img title='Imager flash done' src=images/imager_flash_done.png width="500">
 </p>
 
 ### Boot from NVMe SSD
@@ -122,7 +122,7 @@ Insert the newly flashed MicroSD card into the Raspberry Pi 5, plug an ethernet 
 to power it on. Give the Raspberry Pi 5 roughly 30 seconds to bootup before proceeding to the next step. These connections are shown in the figure below.
 
 <p align="center">
-<img title='Pi5 connection' src=images/pi5_connection.png width=800>
+  <img title='Pi5 connection' src=images/pi5_connection.png width=1000>
 </p>
 
 We'll connect to the Raspberry Pi 5 using `ssh` by running the specific form of this command: `ssh username@hostname`. In our case this will be:
@@ -135,14 +135,14 @@ When connecting to the Pi 5 for the first time, you will be prompted to confirm 
 the host.
 
 <p align='center'>
-<img title='Host auth 1' src=images/host_auth1.png width="400">
+  <img title='Host auth 1' src=images/host_auth1.png width="500">
 </p>
 
 Type `yes` and enter the password when prompted in order to log in.
 
 <p align='center'>
-<img title='Host auth 2' src=images/host_auth2.png width="400">
-<img title='Host auth 3' src=images/host_auth3.png width="400">
+  <img title='Host auth 2' src=images/host_auth2.png width="500">
+  <img title='Host auth 3' src=images/host_auth3.png width="500">
 </p>
 
 In order to boot from the NVMe, we first have to update the bootloader on the Raspberry Pi 5 to a version dated **2024/05/17** or later.
@@ -177,19 +177,19 @@ Scroll down to **Advanced Options** and press enter, then select **A5 Bootloader
 Then click on **Ok**, **Finish** and finally reboot the Pi for the bootloader update to be effected.
 
 <p align='center'>
-<img title='Bootloader update 1' src=images/bootloader_update_1.png width="400">
-<img title='Bootloader update 2' src=images/bootloader_update_2.png width="400">
+  <img title='Bootloader update 1' src=images/bootloader_update_1.png width="500">
+  <img title='Bootloader update 2' src=images/bootloader_update_2.png width="500">
 </p>
 
 <p align='center'>
-<img title='Bootloader update 3' src=images/bootloader_update_3.png width="400">
-<img title='Bootloader update 4' src=images/bootloader_update_4.png width="400">
+  <img title='Bootloader update 3' src=images/bootloader_update_3.png width="500">
+  <img title='Bootloader update 4' src=images/bootloader_update_4.png width="500">
 </p>
 
 <p align='center'>
-<img title='Bootloader update 5' src=images/bootloader_update_5.png width="400">
-<img title='Bootloader update 6' src=images/bootloader_update_6.png width="400">
-<img title='Bootloader update 7' src=images/bootloader_update_7.png width="400">
+  <img title='Bootloader update 5' src=images/bootloader_update_5.png width="500">
+  <img title='Bootloader update 6' src=images/bootloader_update_6.png width="500">
+  <img title='Bootloader update 7' src=images/bootloader_update_7.png width="500">
 </p>
 
 The next thing we need to do is to enable PCIe connector on the Pi 5 because it is disabled by default. To enable the PCIe connector,
@@ -220,18 +220,18 @@ Scroll down and select **6 Advanced Options** choose **A4 Boot Order** click on 
 Then click on **Ok**, **Finish** choose **Yes** to reboot.
 
 <p align='center'>
-<img title='Boot order 1' src=images/boot_order_1.png width="400">
-<img title='Boot order 2' src=images/boot_order_2.png width="400">
+  <img title='Boot order 1' src=images/boot_order_1.png width="500">
+  <img title='Boot order 2' src=images/boot_order_2.png width="500">
 </p>
 
 <p align='center'>
-<img title='Boot order 3' src=images/boot_order_3.png width="400">
-<img title='Boot order 4' src=images/boot_order_4.png width="400">
+  <img title='Boot order 3' src=images/boot_order_3.png width="500">
+  <img title='Boot order 4' src=images/boot_order_4.png width="500">
 </p>
 
 <p align='center'>
-<img title='Boot order 5' src=images/boot_order_5.png width="400">
-<img title='Boot order 6' src=images/boot_order_6.png width="400">
+  <img title='Boot order 5' src=images/boot_order_5.png width="500">
+  <img title='Boot order 6' src=images/boot_order_6.png width="500">
 </p>
 
 Or using the following command,
@@ -269,8 +269,8 @@ when storing and playing back videos of detected objects from Frigate.
 A comparison of the read and write speeds of the MicroSD card and the NVMe SSD used in this project are shown in the images below.
 
 <p align='center'>
-<img title='Microsd card speed' src=images/microsd_card_speed_test.png width="400">
-<img title='NVMe SSD speed' src=images/nvme_ssd_speed_test.png width="400">
+  <img title='Microsd card speed' src=images/microsd_card_speed_test.png width="500">
+  <img title='NVMe SSD speed' src=images/nvme_ssd_speed_test.png width="500">
 </p>
 
 The commands used were obtained from this [guide](https://linuxconfig.org/how-to-test-sd-card-speed-on-raspberry-pi) where the write speeds are tested by writing
@@ -294,7 +294,7 @@ Frigate strongly recommends using a Google Coral for object detection as this $6
 The Goolge Coral PCIe Edge TPU used in this project is shown below.
 
 <p align="center">
-<img title='Coral PCIe TPU' src=images/coral_pcie_tpu.jpg width=800>
+  <img title='Coral PCIe TPU' src=images/coral_pcie_tpu.jpg width=1000>
 </p>
 
 The Google Coral comes in other form factors as shown in the Coral [products page](https://coral.ai/products/). The Google Coral Edge TPU needs to be configured to work on the Dual NVMe SSD Shield and the Raspberry Pi 5. This includes installing the required drivers and packages, installing the Edge TPU runtime and adding some lines to the `/boot/firmware/config.txt` file to get the Coral TPU to run.
@@ -360,7 +360,7 @@ To obtain the most compatibility with all the Frigate and Home Assistant feature
 The image below shows the video pipeline that Frigate uses to process the camera feed.
 
 <p align="center">
-<img title='Frigate video pipeline' src=images/frigate_video_pipeline.png width=600>
+  <img title='Frigate video pipeline' src=images/frigate_video_pipeline.png width=600>
 </p>
 
 More detailed information about the video pipeline can be found in the [documentation](https://docs.frigate.video/frigate/video_pipeline).
@@ -368,14 +368,14 @@ More detailed information about the video pipeline can be found in the [document
 Dahua cameras are recommended because they are more readily available compared to other brands and meet the previously stated requirements. The Dahua bullet camera below is used in this project.
 
 <p align="center">
-<img title='Dahua camera' src=images/dahua_camera.JPG width=800>
+  <img title='Dahua camera' src=images/dahua_camera.JPG width=1000>
 </p>
 
 The Dahua camera will need to be setup before using it with Frigate, this [YouTube video by @ecologicaltime](https://www.youtube.com/watch?v=JxTM-Ja2SI8) provides a walkthrough on how to do this.
 Plug in the IP camera into the POE switch as shown in the connection diagram below.
 
 <p align="center">
-<img title='IP camera connection' src=images/ip_camera_connection.png width=800>
+  <img title='IP camera connection' src=images/ip_camera_connection.png width=1000>
 </p>
 
 After setting up the Dahua camera with the YouTube video, we will need to configure the camera streams for use in Frigate.
@@ -404,7 +404,7 @@ I Frame Interval: 5
 My Dahua bullet camera configurations are as follows,
 
 <p align="center">
-<img title='Dahua camera setup' src=images/dahua_camera_setup.png width=800>
+  <img title='Dahua camera setup' src=images/dahua_camera_setup.png width=1000>
 </p>
 
 The camera sub stream resolution does not go up to `1280*720`, mine was configured at `640*480`; but it still performs well for object detection. More information about choosing
@@ -426,7 +426,7 @@ I wrote another bash script to install Docker based on the debian install steps 
 Before proceeding, ensure that the network devices are connected as shown below.
 
 <p align="center">
-<img title='Network device connections' src=images/network_devices.png width=800>
+  <img title='Network device connections' src=images/network_devices.png width=1000>
 </p>
 
 Going back to the terminal on Raspberry Pi, navigate to the `scripts` folder again and execute this command,
@@ -450,7 +450,6 @@ docker run hello-world
 Which will output the following message,
 
 ```
-
 Hello from Docker!
 This message shows that your installation appears to be working correctly.
 
@@ -569,39 +568,39 @@ The `-d` flag is used to run the container in detached mode or in the background
 If everything went well, you should be able to access the Frigate Web User Interface (UI) in the browser by either using the hostname with `frigipi.local:5000` or using the IP address of the camera with `192.168.8.201:5000`. The Frigate home page is shown in the GIF below.
 
 <p align='center'>
-  <img title='Frigate home page' src=images/frigate_homepage.gif width="800">
+  <img title='Frigate home page' src=images/frigate_homepage.gif width="1000">
 </p>
 
 You can edit the `config.yml` file using the Frigate Config Editor by clicking on the gear button in the bottom left corner then on **Configuration Editor**.
 
 <p align='center'>
-  <img title='Frigate gear button config' src=images/frigate_gear_button_config.png width="800">
+  <img title='Frigate gear button config' src=images/frigate_gear_button_config.png width="1000">
 </p>
 
 There are options to copy the configuration, save config changes and restart the Frigate container or simply to save them, in the top left corner of the page.
 
 <p align='center'>
-  <img title='Frigate config editor' src=images/frigate_config_editor.png width="800">
+  <img title='Frigate config editor' src=images/frigate_config_editor.png width="1000">
 </p>
 
 You can also check out system metrics like the Google Coral detector inference speed, temperature and more.
 
 <p align='center'>
-  <img title='Frigate gear button metrics' src=images/frigate_gear_button_metrics.png width="800">
+  <img title='Frigate gear button metrics' src=images/frigate_gear_button_metrics.png width="1000">
 </p>
 
 <p align='center'>
-  <img title='Frigate system metrics' src=images/frigate_system_metrics.png width="800">
+  <img title='Frigate system metrics' src=images/frigate_system_metrics.png width="1000">
 </p>
 
 There are tabs for **Storage** and **Cameras** which includes information about the camera storage and detections respectively.
 
 <p align='center'>
-  <img title='Frigate system storage' src=images/frigate_system_storage.png width="800">
+  <img title='Frigate system storage' src=images/frigate_system_storage.png width="1000">
 </p>
 
 <p align='center'>
-  <img title='Frigate system cameras' src=images/frigate_system_cameras.png width="800">
+  <img title='Frigate system cameras' src=images/frigate_system_cameras.png width="1000">
 </p>
 
 In **Settings** under **Configuration**, there are tabs for **General Settings**, **Camera Settings**, **Masks/Zones**, **Motion Tuner**,
@@ -609,11 +608,11 @@ In **Settings** under **Configuration**, there are tabs for **General Settings**
 as a guide.
 
 <p align='center'>
-<img title='Frigate gear button settings' src=images/frigate_gear_button_settings.png width="800">
+<img title='Frigate gear button settings' src=images/frigate_gear_button_settings.png width="1000">
 </p>
 
 <p align='center'>
-  <img title='Frigate config settings' src=images/frigate_config_settings.png width="800">
+  <img title='Frigate config settings' src=images/frigate_config_settings.png width="1000">
 </p>
 
 With Frigate installed and running, let's integrate it with Home Assistant.
@@ -627,7 +626,7 @@ using the [Assist voice assistant](https://www.home-assistant.io/voice_control/)
 There are four different installation methods for HA depending on the features required, these [installation methods](https://www.home-assistant.io/installation/#advanced-installation-methods) are shown in the image below.
 
 <p align="center">
-  <img title='Home Assistant Install options' src=images/home_assistant_install_options.png width=800>
+  <img title='Home Assistant Install options' src=images/home_assistant_install_options.png width=1000>
 </p>
 
 We'll need to either install **Home Assistant Operating System (HA OS)** or **Home Assistant Supervised** as these are the only methods that allow use of **add-ons** which is a requirement for integrating HA with Frigate.
@@ -644,15 +643,15 @@ In summary, add-ons run directly alongside Home Assistant, whereas integrations 
 Add-ons are installed from the add-on store under **Settings** > **Add-ons**. Then click on the button on the bottom right corner to view the full add-ons list. 
 
 <p align='center'>
-  <img title='HA add-ons 1' src=images/add-ons-1.png width="800">
+  <img title='HA add-ons 1' src=images/add-ons-1.png width="1000">
 </p>
 
 <p align='center'>
-  <img title='HA add-ons 2' src=images/add-ons-2.png width="800">
+  <img title='HA add-ons 2' src=images/add-ons-2.png width="1000">
 </p>
 
 <p align='center'>
-  <img title='HA add-ons 3' src=images/add-ons-3.png width="800">
+  <img title='HA add-ons 3' src=images/add-ons-3.png width="1000">
 </p>
 
 You can also open the add-on store by clicking on the HA badge below,
@@ -670,27 +669,27 @@ In Home Assistant, go to Settings > People then click on **Add Person** at the b
 The username for the person is set to what you chose by default, next input a password, toggle the **Local access only** button and click on **Create**. Click on **Create** again, now we've created a new person with login credentials we'll use for the MQTT broker.
 
 <p align='center'>
-  <img title='New person 1' src=images/new_person_1.png width="800">
+  <img title='New person 1' src=images/new_person_1.png width="1000">
 </p>
 
 <p align='center'>
-  <img title='New person 2' src=images/new_person_2.png width="800">
+  <img title='New person 2' src=images/new_person_2.png width="1000">
 </p>
 
 <p align='center'>
-  <img title='New person 3' src=images/new_person_3.png width="800">
+  <img title='New person 3' src=images/new_person_3.png width="1000">
 </p>
 
 <p align='center'>
-  <img title='New person 4' src=images/new_person_4.png width="800">
+  <img title='New person 4' src=images/new_person_4.png width="1000">
 </p>
 
 <p align='center'>
-  <img title='New person 5' src=images/new_person_5.png width="800">
+  <img title='New person 5' src=images/new_person_5.png width="1000">
 </p>
 
 <p align='center'>
-  <img title='New person 6' src=images/new_person_6.png width="800">
+  <img title='New person 6' src=images/new_person_6.png width="1000">
 </p>
 
 ### Mosquitto broker Add-on
@@ -700,17 +699,17 @@ We'll use the official Mosquitto broker add-on as the MQTT broker. Click on the 
 [![Open your Home Assistant instance and show the dashboard of an add-on.](https://my.home-assistant.io/badges/supervisor_addon.svg)](https://my.home-assistant.io/redirect/supervisor_addon/?addon=core_mosquitto&repository_url=https%3A%2F%2Fgithub.com%2Fhassio-addons%2Frepository)
 
 <p align='center'>
-  <img title='Mosquitto install 1' src=images/mosquitto_install_1.png width="800">
+  <img title='Mosquitto install 1' src=images/mosquitto_install_1.png width="1000">
 </p>
 
 Start the add-on once it has been installed,
 
 <p align='center'>
-  <img title='Mosquitto install 2' src=images/mosquitto_install_2.png width="800">
+  <img title='Mosquitto install 2' src=images/mosquitto_install_2.png width="1000">
 </p>
 
 <p align='center'>
-  <img title='Mosquitto install 3' src=images/mosquitto_install_3.png width="800">
+  <img title='Mosquitto install 3' src=images/mosquitto_install_3.png width="1000">
 </p>
 
 ### MQTT Integration
@@ -724,47 +723,47 @@ how you want to connect to the MQTT broker, choose **Use the official Mosquitto 
 create a configuration for Mosquitto.
 
 <p align='center'>
-  <img title='MQTT integration 1' src=images/mqtt_int_1.png width="800">
+  <img title='MQTT integration 1' src=images/mqtt_int_1.png width="1000">
 </p>
 
 <p align='center'>
-  <img title='MQTT integration 2' src=images/mqtt_int_2.png width="800">
+  <img title='MQTT integration 2' src=images/mqtt_int_2.png width="1000">
 </p>
 
 <p align='center'>
-  <img title='MQTT integration 3' src=images/mqtt_int_3.png width="800">
+  <img title='MQTT integration 3' src=images/mqtt_int_3.png width="1000">
 </p>
 
 Next click on the **MQTT** integration then on **Configure**. Select **Re-configure MQTT**
 
 <p align='center'>
-  <img title='MQTT integration 4' src=images/mqtt_int_4.png width="800">
+  <img title='MQTT integration 4' src=images/mqtt_int_4.png width="1000">
 </p>
 
 <p align='center'>
-  <img title='MQTT integration 5' src=images/mqtt_int_5.png width="800">
+  <img title='MQTT integration 5' src=images/mqtt_int_5.png width="1000">
 </p>
 
 <p align='center'>
-  <img title='MQTT integration 6' src=images/mqtt_int_6.png width="800">
+  <img title='MQTT integration 6' src=images/mqtt_int_6.png width="1000">
 </p>
 
 This will open up the Broker options, here input the username and password you chose for the new person you previously created then click on **Next**. More options are shown here but we will stick to the defaults, click on **Submit** to save the configuration.
 
 <p align='center'>
-  <img title='MQTT integration 7' src=images/mqtt_int_7.png width="800">
+  <img title='MQTT integration 7' src=images/mqtt_int_7.png width="1000">
 </p>
 
 <p align='center'>
-  <img title='MQTT integration 8' src=images/mqtt_int_8.png width="800">
+  <img title='MQTT integration 8' src=images/mqtt_int_8.png width="1000">
 </p>
 
 <p align='center'>
-  <img title='MQTT integration 9' src=images/mqtt_int_9.png width="800">
+  <img title='MQTT integration 9' src=images/mqtt_int_9.png width="1000">
 </p>
 
 <p align='center'>
-  <img title='MQTT integration 10' src=images/mqtt_int_10.png width="800">
+  <img title='MQTT integration 10' src=images/mqtt_int_10.png width="1000">
 </p>
 
 With MQTT configured, enable MQTT in the `config.yml` file by providing the host IP address of the computer running the Home Assistant and the login credentials for the MQTT broker,
@@ -874,63 +873,63 @@ After installing HACS, open the Frigate HA integration by clicking on the badge 
 Then click on **Download** and download the version shown.
 
 <p align='center'>
-  <img title='Frigate integration 1' src=images/frigate_int_1.png width="800">
+  <img title='Frigate integration 1' src=images/frigate_int_1.png width="1000">
 </p>
 
 <p align='center'>
-  <img title='Frigate integration 2' src=images/frigate_int_2.png width="800">
+  <img title='Frigate integration 2' src=images/frigate_int_2.png width="1000">
 </p>
 
 Next, restart Home Assistant.
 
 <p align='center'>
-  <img title='Frigate integration 3' src=images/frigate_int_3.png width="800">
+  <img title='Frigate integration 3' src=images/frigate_int_3.png width="1000">
 </p>
 
 <p align='center'>
-  <img title='Frigate integration 4' src=images/frigate_int_4.png width="800">
+  <img title='Frigate integration 4' src=images/frigate_int_4.png width="1000">
 </p>
 
 <p align='center'>
-  <img title='Frigate integration 5' src=images/frigate_int_5.png width="800">
+  <img title='Frigate integration 5' src=images/frigate_int_5.png width="1000">
 </p>
 
 After HA has rebooted, go to **Settings** > **Devices & services**. Click on **Add Integration** and search for **Frigate**.
 
 <p align='center'>
-  <img title='Frigate integration 6' src=images/frigate_int_6.png width="800">
+  <img title='Frigate integration 6' src=images/frigate_int_6.png width="1000">
 </p>
 
 <p align='center'>
-  <img title='Frigate integration 7' src=images/frigate_int_7.png width="800">
+  <img title='Frigate integration 7' src=images/frigate_int_7.png width="1000">
 </p>
 
 You will need to input the URL to access Frigate. Either input the IP address or hostname of the Raspberry Pi 5 with port **5000** and click on **Submit**. I chose the hostname `http://frigipi.local:5000`.
 
 <p align='center'>
-  <img title='Frigate integration 8' src=images/frigate_int_8.png width="800">
+  <img title='Frigate integration 8' src=images/frigate_int_8.png width="1000">
 </p>
 
 A **Success!** message is shown if the configuration is done properly and the integration should find your cameras and Frigate as devices.
 
 <p align='center'>
-  <img title='Frigate integration 9' src=images/frigate_int_9.png width="800">
+  <img title='Frigate integration 9' src=images/frigate_int_9.png width="1000">
 </p>
 
 The camera configuration options discussed in the previous subsections can be accessed by clicking on **2 Devices** under the Frigate integration, then on **Test Cam**.
 
 <p align='center'>
-  <img title='Configuration Toggle 1' src=images/config_toggle_1.png width="800">
+  <img title='Configuration Toggle 1' src=images/config_toggle_1.png width="1000">
 </p>
 
 <p align='center'>
-  <img title='Configuration Toggle 2' src=images/config_toggle_2.png width="800">
+  <img title='Configuration Toggle 2' src=images/config_toggle_2.png width="1000">
 </p>
 
 The different options that can be toggled are highlighted below.
 
 <p align='center'>
-  <img title='Configuration Toggle 3' src=images/config_toggle_3.png width="800">
+  <img title='Configuration Toggle 3' src=images/config_toggle_3.png width="1000">
 </p>
 
 ### Frigate Card
@@ -942,99 +941,99 @@ Click on the badge below to open the HACS Frigate card.
 [![Open your Home Assistant instance and open a repository inside the Home Assistant Community Store.](https://my.home-assistant.io/badges/hacs_repository.svg)](https://my.home-assistant.io/redirect/hacs_repository/?category=plugin&owner=dermotduffy&repository=frigate-hass-card)
 
 <p align='center'>
-  <img title='Frigate card 1' src=images/frigate_card_1.png width="800">
+  <img title='Frigate card 1' src=images/frigate_card_1.png width="1000">
 </p>
 
 Then click on **Download** and download the version shown.
 
 <p align='center'>
-  <img title='Frigate card 2' src=images/frigate_card_2.png width="800">
+  <img title='Frigate card 2' src=images/frigate_card_2.png width="1000">
 </p>
 
 You will then be prompted to reload the browser to use the updated resources, click on **Reload**.
 
 <p align='center'>
-  <img title='Frigate card 3' src=images/frigate_card_3.png width="800">
+  <img title='Frigate card 3' src=images/frigate_card_3.png width="1000">
 </p>
 
 We are going to create a new dashboard for the Frigate card. Go to **Settings** > **Dashboards**. At the bottom right click on **Add Dashboard** then choose **New dashboard from scratch**.
 
 <p align='center'>
-  <img title='Frigate card 4' src=images/frigate_card_4.png width="800">
+  <img title='Frigate card 4' src=images/frigate_card_4.png width="1000">
 </p>
 
 <p align='center'>
-  <img title='Frigate card 5' src=images/frigate_card_5.png width="800">
+  <img title='Frigate card 5' src=images/frigate_card_5.png width="1000">
 </p>
 
 <p align='center'>
-  <img title='Frigate card 6' src=images/frigate_card_6.png width="800">
+  <img title='Frigate card 6' src=images/frigate_card_6.png width="1000">
 </p>
 
 Choose a title for the dashboard and search for an appropriate icon for it.
 
 <p align='center'>
-  <img title='Frigate card 7' src=images/frigate_card_7.png width="800">
+  <img title='Frigate card 7' src=images/frigate_card_7.png width="1000">
 </p>
 
 Open the newly created dashboard and click on edit button in the top right corner.
 
 <p align='center'>
-  <img title='Frigate card 8' src=images/frigate_card_8.png width="800">
+  <img title='Frigate card 8' src=images/frigate_card_8.png width="1000">
 </p>
 
 <p align='center'>
-  <img title='Frigate card 9' src=images/frigate_card_9.png width="800">
+  <img title='Frigate card 9' src=images/frigate_card_9.png width="1000">
 </p>
 
 Click on **Create section** then on **Add card**.
 
 <p align='center'>
-  <img title='Frigate card 10' src=images/frigate_card_10.png width="800">
+  <img title='Frigate card 10' src=images/frigate_card_10.png width="1000">
 </p>
 
 <p align='center'>
-  <img title='Frigate card 11' src=images/frigate_card_11.png width="800">
+  <img title='Frigate card 11' src=images/frigate_card_11.png width="1000">
 </p>
 
 Search for **Frigate**, then select **Custom: Frigate card**.
 
 <p align='center'>
-  <img title='Frigate card 12' src=images/frigate_card_12.png width="800">
+  <img title='Frigate card 12' src=images/frigate_card_12.png width="1000">
 </p>
 
 Add cameras to the card, in our case we only have **Test Cam**.
 
 <p align='center'>
-  <img title='Frigate card 13' src=images/frigate_card_13.png width="800">
+  <img title='Frigate card 13' src=images/frigate_card_13.png width="1000">
 </p>
 
 You can tweak the card layout under the **Layout** tab to display the card in fullscreen, otherwise click on **Save** to create the section. Click on **Done** to create the dashboard.
 
 <p align='center'>
-  <img title='Frigate card 14' src=images/frigate_card_14.png width="800">
+  <img title='Frigate card 14' src=images/frigate_card_14.png width="1000">
 </p>
 
 <p align='center'>
-  <img title='Frigate card 15' src=images/frigate_card_15.png width="800">
+  <img title='Frigate card 15' src=images/frigate_card_15.png width="1000">
 </p>
 
 The dashboard will display the live feed of the camera. Clicking on the frigate logo brings up different menu options
 which are **Frigate Menu**, **Live view**, **Clips gallery**, **Snapshots gallery**, **Timeline view** and **Fullscreen** (if you only have one camera connected). 
 
 <p align='center'>
-  <img title='Frigate card 16' src=images/frigate_card_16.png width="800">
+  <img title='Frigate card 16' src=images/frigate_card_16.png width="1000">
 </p>
 
 The Frigate data can also be viewed in the Media browser in Home Assistant. Click on **Media** on the dashboard panels on the left, then on **Frigate**.
 **Clips** are videos with motion/object detection, **Recordings** are saved videos depending on your configuration in `config.yml`, while **Snapshots** are pictures of an event.
 
 <p align='center'>
-  <img title='Frigate card 17' src=images/frigate_card_17.png width="800">
+  <img title='Frigate card 17' src=images/frigate_card_17.png width="1000">
 </p>
 
 <p align='center'>
-  <img title='Frigate card 18' src=images/frigate_card_18.png width="800">
+  <img title='Frigate card 18' src=images/frigate_card_18.png width="1000">
 </p>
 
 ### Setup motion masks in Frigate
@@ -1045,7 +1044,7 @@ Back in the Frigate Web UI, go to system settings click on the **Debug** tab and
 can see a red box around the second digits of the timestamp.
 
 <p align='center'>
-  <img title='Frigate mask 1' src=images/frigate_mask_1.png width="800">
+  <img title='Frigate mask 1' src=images/frigate_mask_1.png width="1000">
 </p>
 
 To create a motion mask, click on the **Masks/Zones** tab, then start drawing a polygon around the timestamp. Once you have done this, click on **Save**.
@@ -1053,39 +1052,39 @@ To create a motion mask, click on the **Masks/Zones** tab, then start drawing a 
 ***Note: I encountered some difficulty in closing the polygon around the timestamp, you might have to try a few times to get this to work well.***
 
 <p align='center'>
-  <img title='Frigate mask 2' src=images/frigate_mask_2.png width="800">
+  <img title='Frigate mask 2' src=images/frigate_mask_2.png width="1000">
 </p>
 
 <p align='center'>
-  <img title='Frigate mask 3' src=images/frigate_mask_3.png width="800">
+  <img title='Frigate mask 3' src=images/frigate_mask_3.png width="1000">
 </p>
 
 <p align='center'>
-  <img title='Frigate mask 4' src=images/frigate_mask_4.png width="800">
+  <img title='Frigate mask 4' src=images/frigate_mask_4.png width="1000">
 </p>
 
 We get a confirmation message that the motion mask has been saved and we are prompted to restart Frigate to apply the changes.
 
 <p align='center'>
-  <img title='Frigate mask 5' src=images/frigate_mask_5.png width="800">
+  <img title='Frigate mask 5' src=images/frigate_mask_5.png width="1000">
 </p>
 
 Back in the config editor, the coordinates of the motion mask are included in the `config.yml` file as shown below.
 
 <p align='center'>
-  <img title='Frigate mask 6' src=images/frigate_mask_6.png width="800">
+  <img title='Frigate mask 6' src=images/frigate_mask_6.png width="1000">
 </p>
 
 Save the configuration and restart the Frigate container to effect the changes.
 
 <p align='center'>
-  <img title='Frigate mask 7' src=images/frigate_mask_7.png width="800">
+  <img title='Frigate mask 7' src=images/frigate_mask_7.png width="1000">
 </p>
 
 The GIF below confirms that the motion mask worked as there are no red boxes around the timestamp.
 
 <p align='center'>
-  <img title='Frigate after mask' src=images/frigate_after_mask.gif width="800">
+  <img title='Frigate after mask' src=images/frigate_after_mask.gif width="1000">
 </p>
 
 ## Long term NVR solution
@@ -1096,25 +1095,25 @@ I considered using this hardware setup as a long term NVR solution with 3 camera
 The X1202 provides backup power using 4x 18650 Li-ion batteries and other features which can read about [here](https://wiki.geekworm.com/X1202#Overview).
 
 <p align='center'>
-  <img title='Geekworm UPS' src=images/geekworm_ups.png width="800">
+  <img title='Geekworm UPS' src=images/geekworm_ups.png width="1000">
 </p>
 
 <p align='center'>
-  <img title='Geekworm UPS with batteries' src=images/geekworm_ups_batteries.png width="800">
+  <img title='Geekworm UPS with batteries' src=images/geekworm_ups_batteries.png width="1000">
 </p>
 
 The assembly guide for the UPS Shield and the metal case are also available in the [User Manual section](https://wiki.geekworm.com/X1202#User_Manual) of the X1202 Geekworm wiki. I might consider getting a backup power system to run the HA PC, router and POE switch in case the power goes out.
 
 <p align='center'>
-  <img title='Geekworm UPS assembled' src=images/geekworm_ups_assembled.png width="800">
+  <img title='Geekworm UPS assembled' src=images/geekworm_ups_assembled.png width="1000">
 </p>
 
 <p align="center">
-  <img title='Metal case power plugged in' src=images/metal_case_plugged.JPG width=800>
+  <img title='Metal case power plugged in' src=images/metal_case_plugged.JPG width="1000">
 </p>
 
 <p align="center">
-  <img title='Metal case power unplugged' src=images/metal_case_unplugged.JPG width=800>
+  <img title='Metal case power unplugged' src=images/metal_case_unplugged.JPG width="1000">
 </p>
 
 One final thing to setup are mobile notifications to notify you of any objects detected by Frigate. This [Home Assistant blueprint](https://community.home-assistant.io/t/frigate-mobile-app-notifications-2-0/559732) can be used to setup 
@@ -1126,7 +1125,7 @@ Out of curiosity, I wanted to compare how hot the Google Coral Edge TPU gets whe
 cooler fan and finally the active cooler in the X1202-C1 metal case. I'm using the active cooler from Argon 40. 
 
 <p align="center">
-  <img title='Argon active cooler' src=images/argon_active_cooler.jpg width=800>
+  <img title='Argon active cooler' src=images/argon_active_cooler.jpg width="1000">
 </p>
 
 The TPU temperature data can be accessed from an entity in Home Assistant. From the [Home Assistant terminology page](https://www.home-assistant.io/getting-started/concepts-terminology/#entities
@@ -1142,45 +1141,45 @@ By default the TPU temperature entity is disabled. To enable it, go to **Setting
 under the Frigate integration, then on **Frigate**. Under **Diagnostic** click on **+4 entities not shown**.
 
 <p align='center'>
-  <img title='Frigate apex temp enable 1' src=images/frigate_apex_temp_1.png width="800">
+  <img title='Frigate apex temp enable 1' src=images/frigate_apex_temp_1.png width="1000">
 </p>
 
 <p align='center'>
-  <img title='Frigate apex temp enable 2' src=images/frigate_apex_temp_2.png width="800">
+  <img title='Frigate apex temp enable 2' src=images/frigate_apex_temp_2.png width="1000">
 </p>
 
 <p align='center'>
-  <img title='Frigate apex temp enable 3' src=images/frigate_apex_temp_3.png width="800">
+  <img title='Frigate apex temp enable 3' src=images/frigate_apex_temp_3.png width="1000">
 </p>
 
 Click on **Apex 0 temperature**, then on the gear button and finally on **Enable** to enable the entity. 
 
 <p align='center'>
-  <img title='Frigate apex temp enable 4' src=images/frigate_apex_temp_4.png width="800">
+  <img title='Frigate apex temp enable 4' src=images/frigate_apex_temp_4.png width="1000">
 </p>
 
 <p align='center'>
-  <img title='Frigate apex temp enable 5' src=images/frigate_apex_temp_5.png width="800">
+  <img title='Frigate apex temp enable 5' src=images/frigate_apex_temp_5.png width="1000">
 </p>
 
 <p align='center'>
-  <img title='Frigate apex temp enable 6' src=images/frigate_apex_temp_6.png width="800">
+  <img title='Frigate apex temp enable 6' src=images/frigate_apex_temp_6.png width="1000">
 </p>
 
 Click on **Ok** then on **Update** to effect the changes.
 
 <p align='center'>
-  <img title='Frigate apex temp enable 7' src=images/frigate_apex_temp_7.png width="800">
+  <img title='Frigate apex temp enable 7' src=images/frigate_apex_temp_7.png width="1000">
 </p>
 
 <p align='center'>
-  <img title='Frigate apex temp enable 8' src=images/frigate_apex_temp_8.png width="800">
+  <img title='Frigate apex temp enable 8' src=images/frigate_apex_temp_8.png width="1000">
 </p>
 
 This is how the **Diagnostic** section looks like after enabling all the Google Coral TPU entities. 
 
 <p align='center'>
-  <img title='Frigate apex temp enable 9' src=images/frigate_apex_temp_9.png width="800">
+  <img title='Frigate apex temp enable 9' src=images/frigate_apex_temp_9.png width="1000">
 </p>
 
 Now that we have enabled the TPU temperature entity, we can use this data to plot our temperature graphs. We'll be using the Plotly Graph Card from HACS to achieve this.
@@ -1191,39 +1190,39 @@ Click on the badge below to open the Plotly Graph Card,
 
 
 <p align='center'>
-  <img title='Plotly graph 1' src=images/plotly_graph_1.png width="800">
+  <img title='Plotly graph 1' src=images/plotly_graph_1.png width="1000">
 </p>
 
 Click on **Download** and download the version shown, then reload your browser.
 
 <p align='center'>
-  <img title='Plotly graph 2' src=images/plotly_graph_2.png width="800">
+  <img title='Plotly graph 2' src=images/plotly_graph_2.png width="1000">
 </p>
 
 <p align='center'>
-  <img title='Plotly graph 3' src=images/plotly_graph_3.png width="800">
+  <img title='Plotly graph 3' src=images/plotly_graph_3.png width="1000">
 </p>
 
 Next create a new dashboard and add the **Custom: Plotly Graph Card** to the dashboard section.
 
 <p align='center'>
-  <img title='Plotly graph 4' src=images/plotly_graph_4.png width="800">
+  <img title='Plotly graph 4' src=images/plotly_graph_4.png width="1000">
 </p>
 
 Give the graph a title, set the hours to show, I used `0.25` which means that it will show data f`r every 15 minutes. Under **Entities**, choose **Frigate Apex 0 temperature**, then save the configuration.
 
 <p align='center'>
-  <img title='Plotly graph 5' src=images/plotly_graph_5.png width="800">
+  <img title='Plotly graph 5' src=images/plotly_graph_5.png width="1000">
 </p>
 
 <p align='center'>
-  <img title='Plotly graph 6' src=images/plotly_graph_6.png width="800">
+  <img title='Plotly graph 6' src=images/plotly_graph_6.png width="1000">
 </p>
 
 The temperature is plotted on the y-axis in degree Celsius.
 
 <p align='center'>
-  <img title='Plotly graph 7' src=images/plotly_graph_7.png width="800">
+  <img title='Plotly graph 7' src=images/plotly_graph_7.png width="1000">
 </p>
 
 To keep the test conditions fairly constant,
@@ -1234,15 +1233,15 @@ To keep the test conditions fairly constant,
 And these are the results.
 
 <p align="center">
-  <img title='Temp test no fan' src=images/temp_test_no_fan.png width=800>
+  <img title='Temp test no fan' src=images/temp_test_no_fan.png width="1000">
 </p>
 
 <p align="center">
-  <img title='Temp test with fan' src=images/temp_test_fan.png width=800>
+  <img title='Temp test with fan' src=images/temp_test_fan.png width="1000">
 </p>
 
 <p align="center">
-  <img title='Temp test with fan and metal case' src=images/temp_test_fan_metal_case.png width=800>
+  <img title='Temp test with fan and metal case' src=images/temp_test_fan_metal_case.png width="1000">
 </p>
 
 The metal case does not seem to dissipate heat compared to using the Pi 5 without the case. Turning on an external fan or air conditioning should bring down the Coral TPU temperature even more.
