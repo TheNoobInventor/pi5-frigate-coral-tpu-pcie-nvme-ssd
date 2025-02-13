@@ -33,8 +33,16 @@ This guide is available in video format in this Youtube video ***[in progress]**
   - [Long term NVR solution](#long-term-nvr-solution)
   - [Temperature graphs](#temperature-graphs)
   - [Project demo \[Work in Progress\]](#project-demo-work-in-progress)
-  - [References](#references)
-
+    - [Reference Links](#reference-links)
+      - [Geekworm related:](#geekworm-related)
+      - [Frigate related:](#frigate-related)
+      - [Coral related:](#coral-related)
+      - [Raspberry Pi related:](#raspberry-pi-related)
+      - [Dahua IP camera related:](#dahua-ip-camera-related)
+      - [Linux related:](#linux-related)
+      - [Docker related:](#docker-related)
+      - [MQTT related:](#mqtt-related)
+      - [Home Assistant related:](#home-assistant-related)
 ---
 
 ## Hardware components
@@ -66,7 +74,7 @@ The shield is shown below.
   <img title='X1004 mounted' src=images/x1004_mounted.jpg width=500>
 </p>
 
-The IP camera used should meet Frigate's requirements of supporting H.264 encoding and the real-time streaming protocol or RTSP. The IP camera is setup in this [section](#ip-camera-setup).
+The IP camera used should meet Frigate's requirements of supporting H.264 encoding and the real-time streaming protocol or RTSP. The IP camera is setup in this [subsection](#ip-camera-setup).
 
 But before connecting the hardware components, let's set up the software.
 
@@ -100,7 +108,7 @@ Then choose the inserted MicroSD card as the storage for the image. Afterwards, 
 
 Under the **General** settings tab, choose a **hostname**, a **username** and **password**. The hostname is the unique identifier for the Pi 5 on the network.
 
-Navigate to the **Services** tab, check the **Enable SSH button** and click on the **Use password authentication** option, this is the password chosen in the previous step. Enabling SSH provides [secure access](https://www.raspberrypi.com/documentation/computers/remote-access.html#remote-access) to a terminal session on the Raspberry Pi 5 from any device on the same local network as the Pi; commands can be sent to the Pi 5 over the network to run programs, change settings and [install packages](https://www.ev3dev.org/docs/tutorials/connecting-to-ev3dev-with-ssh/).
+Navigate to the **Services** tab, check **Enable SSH** and click on **Use password authentication**, this is the password chosen in the previous step. Enabling SSH provides [secure access](https://www.raspberrypi.com/documentation/computers/remote-access.html#remote-access) to a terminal session on the Raspberry Pi 5 from any device on the same local network as the Pi; commands can be sent to the Pi 5 over the network to run programs, change settings and [install packages](https://www.ev3dev.org/docs/tutorials/connecting-to-ev3dev-with-ssh/).
 
 Then save these settings.
 
@@ -248,7 +256,7 @@ BOOT_ORDER=0xf416
 
 Again save these changes and close the editor with `Ctrl+x`. Reboot the Pi 5 for the changes to be effected.
 
-With the PCIe connector enabled and the Pi 5 set to boot from an NVMe first, the main left to do is to boot the Raspberry Pi 5 from the NVMe SSD.
+With the PCIe connector enabled and the Pi 5 set to boot from an NVMe first, the main thing left to do is to boot the Raspberry Pi 5 from the NVMe SSD.
 We'll carry out the following steps to achieve this:
 
 - Shutdown the Raspberry Pi 5, unplug the MicroSD card and power cable,
@@ -339,7 +347,7 @@ Kernel driver in use: apex
 Kernel modules: apex
 ```
 
-Next let's check to see if the Google Coral is connected and detected by the Pi with this command,
+Next let's check if the Google Coral is connected and detected by the Pi with this command,
 
 ```
 ls /dev/apex_0
@@ -351,7 +359,7 @@ This should output,
 /dev/apex_0
 ```
 
-You can also confirm that the Coral TPU works well by installing the PyCoral library and running image classification tests with these guides from [Pineboards](https://pineboards.io/blogs/tutorials/installing-pycoral-for-google-coral-on-raspberry-pi-5) and [Google](https://coral.ai/docs/m2/get-started/#4-run-a-model-on-the-edge-tpu). But we'll proceed onto setting up the IP Camera for Frigate with the assumption that the device is working properly.
+You can also confirm that the Coral TPU works well by installing the PyCoral library and running image classification tests with these guides from [Pineboards](https://pineboards.io/blogs/tutorials/installing-pycoral-for-google-coral-on-raspberry-pi-5) and [Google](https://coral.ai/docs/m2/get-started/#4-run-a-model-on-the-edge-tpu). But we'll proceed to setting up the IP Camera for Frigate with the assumption that the device is working properly.
 
 ### IP Camera setup
 
@@ -487,7 +495,7 @@ Remember to replace `frigipi` with the username you chose when flashing the OS o
 nano /home/frigipi/frigate/config/config.yml 
 ```
 
-Then paste in this simple config which be sufficient to start up Frigate:
+Then paste in this simple config which will be sufficient to start up Frigate:
 
 ```
 mqtt:
@@ -510,11 +518,11 @@ cameras:
 version: 0.14
 ```
 
-MQTT is disabled for now but is required for the Home Assistant integration in the following section; [HiveMQ](https://www.hivemq.com/mqtt/) provides a lot of useful resources on getting started with MQTT.
+MQTT is disabled for now but it is required for the Home Assistant integration in the following section; [HiveMQ](https://www.hivemq.com/mqtt/) provides a lot of useful resources on getting started with MQTT.
 
 The next part of the config file specifies the detector to be used, which is a single PCIe Google Coral Edge TPU. More information about the supported officially supported detectors is available [here](https://docs.frigate.video/configuration/object_detectors/).
 
-The camera input rtsp path uses one of the [URL options](https://dahuawiki.com/Remote_Access/RTSP_via_VLC) for remote access/RTSP stream with Dahua cameras; other camera brands might have different URL options. `FRIGATE_RTSP_USER` and `FRIGATE_RTSP_PASSWORD` are Docker environment variables for the IP camera's admin username and password, these will be set in the `docker-compose.yml` file which we will configure shortly. The IP camera address is `192.168.8.201` and `554` is the default RTSP port. For my Dahua camera, setting the `subtype` to `0` uses the main stream, while a `subtype` with value `1` uses the sub stream, for detection in this instance. 
+The camera input rtsp path uses one of the [URL options](https://dahuawiki.com/Remote_Access/RTSP_via_VLC) for remote access/RTSP stream with Dahua cameras; other camera brands might have different URL options. `FRIGATE_RTSP_USER` and `FRIGATE_RTSP_PASSWORD` are Docker environment variables for the IP camera's username and password, these will be set in the `docker-compose.yml` file which we will configure shortly. The IP camera address is `192.168.8.201` and `554` is the default RTSP port. For my Dahua camera, setting the `subtype` to `0` uses the main stream, while a value of `1` uses the sub stream, for detection in this instance. 
 
 More information about setting up the Frigate camera inputs are available [here](https://docs.frigate.video/configuration/cameras/).
 
@@ -557,27 +565,27 @@ services:
 
 ***Note: This config file is also available in the*** `config` directory of this repository.
 
-Finally, run this command which will pull the Frigate image, and deploy the container with the configurations we set,
+Finally, run this command which will pull the Frigate docker image, and deploy the container with the configurations we set,
 
 ```
 docker compose up -d
 ```
 
-The `-d` flag is used to run the container in detached mode or in the background, meaning it does not flood the terminal with log data.
+The `-d` flag is used to run the container in detached mode or in the background, meaning it does not flood the terminal with container log data.
 
-If everything went well, you should be able to access the Frigate Web User Interface (UI) in the browser by either using the hostname with `frigipi.local:5000` or using the IP address of the camera with `192.168.8.201:5000`. The Frigate home page is shown in the GIF below.
+If everything went well, you should be able to access the Frigate Web User Interface (UI) in the browser by either using the hostname with `frigipi.local:5000` or using the IP address of your Raspberry Pi 5 with port 5000. The Frigate home page is shown in the GIF below.
 
 <p align='center'>
   <img title='Frigate home page' src=images/frigate_homepage.gif width="1000">
 </p>
 
-You can edit the `config.yml` file using the Frigate Config Editor by clicking on the gear button in the bottom left corner then on **Configuration Editor**.
+You can edit the `config.yml` file using the Frigate Configuration Editor by clicking on the gear button in the bottom left corner then on **Configuration Editor**.
 
 <p align='center'>
   <img title='Frigate gear button config' src=images/frigate_gear_button_config.png width="1000">
 </p>
 
-There are options to copy the configuration, save config changes and restart the Frigate container or simply to save them, in the top left corner of the page.
+There are options to copy the configuration, save config changes and restart the Frigate container or simply to save them, in the top left corner of the Frigate UI.
 
 <p align='center'>
   <img title='Frigate config editor' src=images/frigate_config_editor.png width="1000">
@@ -603,8 +611,8 @@ There are tabs for **Storage** and **Cameras** which includes information about 
   <img title='Frigate system cameras' src=images/frigate_system_cameras.png width="1000">
 </p>
 
-In **Settings** under **Configuration**, there are tabs for **General Settings**, **Camera Settings**, **Masks/Zones**, **Motion Tuner**,
-**Debug** and **Users**. We will look at **Masks** in this [subsection](#setup-motion-masks-in-frigate), but you can go through some these tabs using the Frigate documentation
+Under Configuration, click on settings, here we can see tabs for **General Settings**, **Camera Settings**, **Masks/Zones**, **Motion Tuner**,
+**Debug** and **Users**. We will look at **Masks** in this [subsection](#setup-motion-masks-in-frigate), but you can go through some of these tabs using the Frigate documentation
 as a guide.
 
 <p align='center'>
@@ -619,8 +627,8 @@ With Frigate installed and running, let's integrate it with Home Assistant.
 
 ## Home Assistant integration
 
-Home Assistant (HA) is an open source home automation platform that prioritizes local control an privacy. Users can [integrate](https://www.home-assistant.io/integrations) over a thousand different devices and services, perform
-[automations](https://www.home-assistant.io/docs/automation) with these devices, visualize smart home information using [dashboards](https://www.home-assistant.io/dashboards) with Home Assistant. Your smart home system can be extended using [add-ons](https://www.home-assistant.io/addons) and can be controlled with your voice
+Home Assistant (HA) is an open source home automation platform that prioritizes local control and privacy. Users can [integrate](https://www.home-assistant.io/integrations) over a thousand different devices and services, perform
+[automations](https://www.home-assistant.io/docs/automation) with these devices, and visualize smart home information using [dashboards](https://www.home-assistant.io/dashboards) in Home Assistant. Your smart home system can be extended using [add-ons](https://www.home-assistant.io/addons) and can be controlled with your voice
 using the [Assist voice assistant](https://www.home-assistant.io/voice_control/). There are more Home Assistant features which can be explored on their [homepage](https://www.home-assistant.io/).
 
 There are four different installation methods for HA depending on the features required, these [installation methods](https://www.home-assistant.io/installation/#advanced-installation-methods) are shown in the image below.
@@ -663,10 +671,10 @@ Again, from the [Frigate documentation](https://docs.frigate.video/frigate/insta
 > An MQTT broker is optional with Frigate, but is required for the Home Assistant integration.
 > If using Home Assistant, Frigate and Home Assistant must be connected to the same MQTT broker.
 
-Before setting up the MQTT broker, we need to create a new person in HA with login credentials that will be used when configuring the MQTT broker.
+But before setting up the MQTT broker, we need to create a new person in HA with login credentials that will be used when we are configuring the broker.
 
 In Home Assistant, go to Settings > People then click on **Add Person** at the bottom right corner. Choose a name for the person and toggle on the **Allow login** button.
-The username for the person is set to what you chose by default, next input a password, toggle the **Local access only** button and click on **Create**. Click on **Create** again, now we've created a new person with login credentials we'll use for the MQTT broker.
+The username for the person is set to what you chose by default, next input a password and confirm it, toggle the **Local access only** button, click on **Create**, then on **Create** again.
 
 <p align='center'>
   <img title='New person 1' src=images/new_person_1.png width="1000">
@@ -766,7 +774,7 @@ This will open up the Broker options, here input the username and password you c
   <img title='MQTT integration 10' src=images/mqtt_int_10.png width="1000">
 </p>
 
-With MQTT configured, enable MQTT in the `config.yml` file by providing the host IP address of the computer running the Home Assistant and the login credentials for the MQTT broker,
+With MQTT configured, enable MQTT in the `config.yml` file by providing the host IP address of the computer running Home Assistant and the login credentials for the MQTT broker,
 
 ```
 mqtt:
@@ -781,9 +789,11 @@ More sections need to be added to the `config.yml` file before setting up the Fr
 
 ### go2rtc
 
-Adding [go2rtc](https://github.com/AlexxIT/go2rtc) is optional, but if you wish to live stream the camera feed in Home Assistant, go2rtc will need to be configured.
+[go2rtc](https://github.com/AlexxIT/go2rtc) is a camera streaming application which supports a lot of streaming formats like RTSP, RTMP, WebRTC and [more](https://github.com/AlexxIT/go2rtc?tab=readme-ov-file#module-streams).
 
-The snippet below shows how go2rtc is configured using RTSP, however [other streaming formats](https://github.com/AlexxIT/go2rtc?tab=readme-ov-file#module-streams) are supported. 
+Adding go2rtc is optional, but if you wish to live stream the camera feed in Home Assistant, go2rtc will need to be configured.
+
+This snippet below shows how go2rtc is configured using RTSP. 
 
 ```
 go2rtc:
@@ -797,9 +807,9 @@ More information on configuring go2rtc is available in the [documentation](https
 
 ### Recording
 
-Frigate offers flexibility on how video is recorded. One can choose to record all video from the camera feed, only save video when motion is detected or only record video when an event in ongoing. This [page](https://docs.frigate.video/configuration/record/) provides detailed information on different configuration permutations for recording in Frigate.
+Frigate offers flexibility on how video is recorded. One can choose to record all video from the camera feed, only save video when motion is detected or only record video when an event is ongoing. This [page](https://docs.frigate.video/configuration/record/) provides detailed information on different configuration permutations for recording in Frigate.
 
-The following configuration saves video only when motion is detected and retains the footage for 30 days.
+The following configuration only saves video when motion is detected and retains the footage for 30 days.
 
 ```
 record:
@@ -837,7 +847,7 @@ detect:
 
 ### Snapshots
 
-Snapshots are pictures, in `jpg` format, of an event. Enabling snapshots is also optional and like the detect functionality, it can also be toggled on and off in Frigate HA integration.
+Snapshots are pictures of an event, in `jpg` format. Enabling snapshots is also optional and like the detect functionality, it can be toggled on and off in Frigate HA integration.
 
 ```
 snapshots:
@@ -850,7 +860,7 @@ The full template of this Frigate `config.yml` file and my configuration are ava
 
 ### Frigate HA Integration
 
-Not all add-ons are supported by the HA development team, so they aren't available in the official add-on store, this is where the Home Assistant Community Store (HACS) comes in. 
+Not all integrations are supported by the HA development team, this is where the Home Assistant Community Store (HACS) comes in. 
 
 From the [HACS website](https://hacs.xyz/), 
 
@@ -863,7 +873,7 @@ They defined a custom element as,
 > by the Home Assistant development team.
 
 
-There is a HACS integration for Frigate which we will be using to integrate with Home Assistant. HACS can be installed by either following the [docs](https://hacs.xyz/docs/use/) 
+There is a HACS integration for Frigate which we will use to integrate with Home Assistant. HACS can be installed by either following the [docs](https://hacs.xyz/docs/use/) 
 or this [YouTube video guide by @smart_home_australia](https://www.youtube.com/watch?v=ISb7Rf1n668).
 
 After installing HACS, open the Frigate HA integration by clicking on the badge below,
@@ -1040,7 +1050,7 @@ The Frigate data can also be viewed in the Media browser in Home Assistant. Clic
 
 One of the cool features of Frigate is the ability to create masks of areas of the camera feed to prevent unwanted types of motion from [triggering detection](https://docs.frigate.video/configuration/masks). These regions will be excluded when object detection is performed. An example of such a region is the camera timestamp. We will demonstrate how to setup a motion mask on the camera timestamp.
 
-Back in the Frigate Web UI, go to system settings click on the **Debug** tab and toggle on **Motion Boxes**. This shows red boxes around areas motion is detected. In the top right corner, you 
+Back in the Frigate Web UI, go to system settings click on the **Debug** tab and toggle on **Motion Boxes**. This shows red boxes around areas where motion is detected. In the top right corner, you 
 can see a red box around the second digits of the timestamp.
 
 <p align='center'>
@@ -1121,8 +1131,8 @@ Frigate mobile app notifications but at the time of writing this guide, I was no
 
 ## Temperature graphs
 
-Out of curiosity, I wanted to compare how hot the Google Coral Edge TPU gets when Frigate is running. I plotted the temperature data with the Raspberry Pi without the active cooler fan, with the active
-cooler fan and finally the active cooler in the X1202-C1 metal case. I'm using the active cooler from Argon 40. 
+Out of curiosity, I wanted to compare how hot the Google Coral Edge TPU gets when Frigate is running. I plotted the temperature data with the Raspberry Pi without the active cooler, with the active
+cooler and finally the active cooler in the X1202-C1 metal case. I'm using the active cooler from Argon 40. 
 
 <p align="center">
   <img title='Argon active cooler' src=images/argon_active_cooler.jpg width="1000">
@@ -1203,14 +1213,13 @@ Click on **Download** and download the version shown, then reload your browser.
   <img title='Plotly graph 3' src=images/plotly_graph_3.png width="1000">
 </p>
 
-Next create a new dashboard and add the **Custom: Plotly Graph Card** to the dashboard section.
+Next create a new dashboard and add the **Custom: Plotly Graph Card** to the card section.
 
 <p align='center'>
   <img title='Plotly graph 4' src=images/plotly_graph_4.png width="1000">
 </p>
 
-Give the graph a title, set the hours to show, I used `0.25` which means that it will show data f`r every 15 minutes. Under **Entities**, choose **Frigate Apex 0 temperature**, then save the configuration.
-
+Give the graph a title, for the hours to show, I used `0.25` which means that it will show data over a 15 minute rolling window. Under **Entities**, choose **Frigate Apex 0 temperature**, then save the configuration.
 <p align='center'>
   <img title='Plotly graph 5' src=images/plotly_graph_5.png width="1000">
 </p>
@@ -1219,7 +1228,7 @@ Give the graph a title, set the hours to show, I used `0.25` which means that it
   <img title='Plotly graph 6' src=images/plotly_graph_6.png width="1000">
 </p>
 
-The temperature is plotted on the y-axis in degree Celsius.
+The temperature is plotted on the y-axis in degree Celsuis and time on the x-axis in minutes.
 
 <p align='center'>
   <img title='Plotly graph 7' src=images/plotly_graph_7.png width="1000">
@@ -1227,8 +1236,9 @@ The temperature is plotted on the y-axis in degree Celsius.
 
 To keep the test conditions fairly constant,
 
-- I had no external fan or air conditioning on in the room the Pi 5 was in and
-- I live recorded all the footage of me working on my Desktop
+- I had no external fan or air conditioning on in the room the Pi 5 was in
+- Frigate was working on a live feed of me in the room, and 
+- I shutdown the Pi before each test and allowed it to cool down.
 
 And these are the results.
 
@@ -1244,7 +1254,13 @@ And these are the results.
   <img title='Temp test with fan and metal case' src=images/temp_test_fan_metal_case.png width="1000">
 </p>
 
-The metal case does not seem to dissipate heat compared to using the Pi 5 without the case. Turning on an external fan or air conditioning should bring down the Coral TPU temperature even more.
+As you probably guessed, the coral temperature, without the active cooler climbed steadily, to over 60 degrees in this test; it was hot to touch. 
+
+The best configuration is the Pi 5 with the active cooler without the case. Here the active cooler fan levels the coral temperature around 55 degrees. 
+
+The metal case setup does not dissipate heat as fast, the temperature flattens around 60 degrees Celsuis. 
+
+Having an external fan or air conditioning in the room should bring down the Coral TPU temperature regardless of the setup.But turning on an external fan or air conditioning should bring down the Coral TPU temperature even more regardless of the setup.
 
 ## Project demo [Work in Progress]
 
@@ -1252,12 +1268,74 @@ A video below walk through the steps of setting up Frigate on the Raspberry Pi 5
 
 [<img src="images/thumbnail.png" width="80%">](https://youtu.be/CHANGEME)
 
-## References
+### Reference Links
 
-- [How to update Raspberry Pi EEPROM firmware](https://wiki.geekworm.com/How_to_update_eeprom_firmware)
-- [Updating the Bootloader on a Raspberry Pi](https://pimylifeup.com/raspberry-pi-bootloader/)
-- [NVMe SSD boot with the Raspberry Pi 5](https://wiki.geekworm.com/NVMe_SSD_boot_with_the_Raspberry_Pi_5)
-- [Installing Frigate on Raspberry Pi 5](https://pineboards.io/blogs/tutorials/installing-frigate-on-raspberry-pi-5-with-a-google-coral-tpu)
+#### Geekworm related:
+
+- [Geekworm X1004](https://wiki.geekworm.com/X1004)
 - [Geekworm X1202](https://wiki.geekworm.com/X1202)
-- [Coral AI Person Detection with Home Assistant & Frigate](https://fixtse.com/blog/coral-ia-frigate)
+- [Incompatible NVMe SSD drive and NVMe SSD boot setup](https://wiki.geekworm.com/NVMe_SSD_boot_with_the_Raspberry_Pi_5)
+- [How to update EEPROM firmware](https://wiki.geekworm.com/How_to_update_eeprom_firmware)
+- [NVMe SSD boot with the Raspberry Pi 5](https://wiki.geekworm.com/NVMe_SSD_boot_with_the_Raspberry_Pi_5)
+
+#### Frigate related:
+
+- [Official Frigate Installation Docs](https://docs.frigate.video/frigate/installation/)
+- [Recommended Frigate Hardware](https://docs.frigate.video/frigate/hardware/)
+- [Installing Frigate on Raspberry Pi 5](https://pineboards.io/blogs/tutorials/installing-frigate-on-raspberry-pi-5-with-a-google-coral-tpu)
+- [Frigate camera setup](https://docs.frigate.video/frigate/camera_setup/#example-camera-configuration)
+- [Frigate full reference configuration](https://docs.frigate.video/configuration/reference)
+- [Frigate video pipeline](https://docs.frigate.video/frigate/video_pipeline/)
+- [Choosing a detect resolution](https://docs.frigate.video/frigate/camera_setup/#choosing-a-detect-resolution)
+- [Frigate record](https://docs.frigate.video/configuration/record/)
+- [Available objects](https://docs.frigate.video/configuration/objects/)
+- [Frigate+](https://frigate.video/plus/)
 - [Building Frigate With Google Coral TPU, Portainer, Docker On A Raspberry Pi 5 with NFS Storage & Home Assistant Integration](https://automation.baldacchino.net/building-frigate-with-google-coral-tpu-portainer-docker-on-a-raspberry-pi-5-with-nfs-storage-home-assistant-integration/)
+- [Coral AI Person Detection with Home Assistant & Frigate](https://www.youtube.com/watch?v=xwFfcw5vmTU)
+- [AI on a Pi? Believe it!](https://www.youtube.com/watch?v=so8_h0EKPWU)
+
+#### Coral related:
+
+- [Google Coral](https://coral.ai/products/)
+- [Installing PyCoral for Google Coral on Raspberry Pi 5](https://pineboards.io/blogs/tutorials/installing-pycoral-for-google-coral-on-raspberry-pi-5)
+- [Run a model on Edge TPU](https://coral.ai/docs/m2/get-started/#4-run-a-model-on-the-edge-tpu)
+- [Boot config to allow the Pi to detect the Coral TPU PCIe](https://forums.raspberrypi.com/viewtopic.php?t=363682&start=25)
+
+#### Raspberry Pi related:
+
+- [Raspberry Pi Imager](https://www.raspberrypi.com/software/)
+- [Recommended SD cards](https://www.raspberrypi.com/documentation/computers/getting-started.html)
+- [How to test sd card speed on Raspberry Pi](https://linuxconfig.org/how-to-test-sd-card-speed-on-raspberry-pi)
+- [Updating the Bootloader on a Raspberry Pi](https://pimylifeup.com/raspberry-pi-bootloader/)
+
+#### Dahua IP camera related:
+
+- [Dahua IP camera setup with remote view - no NVR- step by step](https://www.youtube.com/watch?v=JxTM-Ja2SI8)
+- [Dahua camera rtsp link](https://dahuawiki.com/Remote_Access/RTSP_via_VLC)
+
+#### Linux related:
+
+- [60 Linux Commands you NEED to know (in 10 minutes)](https://www.youtube.com/watch?v=gd7BXuUQ91w)
+- [100+ Linux Things you Need to Know](https://www.youtube.com/watch?v=LKCVKw9CzFo)
+- [Introduction to Linux and Basic Linux Commands for Beginners](https://www.youtube.com/watch?v=IVquJh3DXUA)
+
+#### Docker related:
+
+- [Docker Crash Course for Absolute Beginners](https://www.youtube.com/watch?v=pg19Z8LL06w)
+- [What is Docker?](https://docs.docker.com/get-started/docker-overview/)
+
+#### MQTT related:
+- [HiveMQ](https://www.hivemq.com/mqtt/)
+- [HiveMQ MQTT Essentials playlist](https://www.youtube.com/playlist?list=PLRkdoPznE1EMXLW6XoYLGd4uUaB6wB0wd)
+- [MQTT Basics: What is MQTT and How Does it Work?](https://www.youtube.com/watch?v=z4r4hIZcp40&t=14s)
+
+#### Home Assistant related:
+
+- [Home Assistant](https://www.home-assistant.io/)
+- [HACS](https://hacs.xyz/)
+- [Install HACS in Home Assistant](https://www.youtube.com/watch?v=ISb7Rf1n668)
+- [Add-ons](https://www.home-assistant.io/getting-started/concepts-terminology/#add-ons)
+- [Integrations]((https://www.home-assistant.io/getting-started/concepts-terminology/#integrations))
+- [Entities](https://www.home-assistant.io/docs/glossary/#entity)
+- [Frigate HA mobile notifications](https://community.home-assistant.io/t/frigate-mobile-app-notifications-2-0/559732)
+- [Home Assistant Plotly Graph Card - Installation, Simple and Advanced features](https://www.youtube.com/watch?v=m0NCgkynPNY)
