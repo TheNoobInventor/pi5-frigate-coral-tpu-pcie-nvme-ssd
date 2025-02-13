@@ -10,7 +10,7 @@ other slot has a 512 GB NVMe SSD used as a boot drive, runs the Frigate Docker c
 and stores Frigate's snapshots and recordings.
 
 The steps on how to integrate Frigate with Home Assistant are also outlined in this guide.
-This guide is available in video format in this Youtube video ***[in progress]***.
+This guide is available in video format in this [Youtube video](https://youtu.be/GZTiWnuYwOc).
 
 ---
 - [Frigate setup on Raspberry Pi 5 using Google Coral PCIe Edge TPU](#frigate-setup-on-raspberry-pi-5-using-google-coral-pcie-edge-tpu)
@@ -32,7 +32,7 @@ This guide is available in video format in this Youtube video ***[in progress]**
     - [Setup motion masks in Frigate](#setup-motion-masks-in-frigate)
   - [Long term NVR solution](#long-term-nvr-solution)
   - [Temperature graphs](#temperature-graphs)
-  - [Project demo \[Work in Progress\]](#project-demo-work-in-progress)
+  - [Project demo](#project-demo)
     - [Reference Links](#reference-links)
       - [Geekworm related:](#geekworm-related)
       - [Frigate related:](#frigate-related)
@@ -1262,11 +1262,11 @@ The metal case setup does not dissipate heat as fast, the temperature flattens a
 
 Having an external fan or air conditioning in the room should bring down the Coral TPU temperature regardless of the setup.But turning on an external fan or air conditioning should bring down the Coral TPU temperature even more regardless of the setup.
 
-## Project demo [Work in Progress]
+## Project demo
 
 A video below walk through the steps of setting up Frigate on the Raspberry Pi 5 using Geekworm's X1004 Dual NVMe SSD Shield with the PCIe Google Coral Edge TPU.
 
-[<img src="images/thumbnail.png" width="80%">](https://youtu.be/CHANGEME)
+[<img src="images/thumbnail.png" width="80%">](https://youtu.be/GZTiWnuYwOc)
 
 ### Reference Links
 
@@ -1311,7 +1311,7 @@ A video below walk through the steps of setting up Frigate on the Raspberry Pi 5
 #### Dahua IP camera related:
 
 - [Dahua IP camera setup with remote view - no NVR- step by step](https://www.youtube.com/watch?v=JxTM-Ja2SI8)
-- [Dahua camera rtsp link](https://dahuawiki.com/Remote_Access/RTSP_via_VLC)
+- [Dahua camera RTSP link](https://dahuawiki.com/Remote_Access/RTSP_via_VLC)
 
 #### Linux related:
 
@@ -1332,10 +1332,11 @@ A video below walk through the steps of setting up Frigate on the Raspberry Pi 5
 #### Home Assistant related:
 
 - [Home Assistant](https://www.home-assistant.io/)
+- [ Home Assistant Setup Made Easy: The Ultimate Guide](https://www.youtube.com/watch?v=Y38qRYYAwAI)
 - [HACS](https://hacs.xyz/)
 - [Install HACS in Home Assistant](https://www.youtube.com/watch?v=ISb7Rf1n668)
 - [Add-ons](https://www.home-assistant.io/getting-started/concepts-terminology/#add-ons)
-- [Integrations]((https://www.home-assistant.io/getting-started/concepts-terminology/#integrations))
+- [Integrations](https://www.home-assistant.io/getting-started/concepts-terminology/#integrations)
 - [Entities](https://www.home-assistant.io/docs/glossary/#entity)
 - [Frigate HA mobile notifications](https://community.home-assistant.io/t/frigate-mobile-app-notifications-2-0/559732)
 - [Home Assistant Plotly Graph Card - Installation, Simple and Advanced features](https://www.youtube.com/watch?v=m0NCgkynPNY)
